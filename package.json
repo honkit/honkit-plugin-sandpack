@@ -22,7 +22,7 @@
   },
   "scripts": {
     "build": "npm run build:assert && npm run build:lib",
-    "build:assert": "esbuild src/sandpack.tsx --target=es2015 --bundle --outfile=assets/honkit-plugin-sandpack.js",
+    "build:assert": "esbuild src/sandpack.tsx --target=es2015 --bundle --minify --sourcemap --outfile=assets/honkit-plugin-sandpack.js",
     "build:lib": "tsc -p .",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
     "prepare": "git config --local core.hooksPath .githooks",
