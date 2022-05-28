@@ -18,8 +18,10 @@ Actual: ${comment}
     try {
         const json = JSON.parse(
             optionString[1]
-                .replaceAll("\\\\u003c\\\\u0021\\\\u002d\\\\u002d", "<!--")
-                .replaceAll("\\\\u002d\\\\u002d\\\\u003e", "-->")
+                .split("\\\\u003c\\\\u0021\\\\u002d\\\\u002d")
+                .join("<!--")
+                .split("\\\\u002d\\\\u002d\\\\u003e")
+                .join("-->")
         );
         return {
             ...json
