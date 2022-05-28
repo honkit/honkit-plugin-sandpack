@@ -1,11 +1,13 @@
 # Introduction
 
 <style>
+.markdown-section {
+    overflow: initial!important
+}
 .honkit-plugin-sandpack {
     width: calc(100% + 100px);
     margin: 0 0 0 -100px;
     background: #EECE34;
-    position: absolute;
 }
 </style>
 
@@ -26,3 +28,5 @@
 ```js
 document.querySelector("h1").style.color = "red";
 ```
+
+This is demo.
