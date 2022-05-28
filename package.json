@@ -29,7 +29,7 @@
     "prepublishOnly": "npm run build",
     "watch": "tsc -p . --watch",
     "test": "npm run build",
-    "website": "yarn run build && cd public && yarn install && yarn webstie"
+    "website": "yarn run build && (cd public && yarn install && yarn webstie)"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,css}": [
