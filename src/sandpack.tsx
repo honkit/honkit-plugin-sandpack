@@ -3,6 +3,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { SandpackSetup } from "@codesandbox/sandpack-react/dist/types/types";
 import { parseComment, SandboxInfo } from "./parse-comment";
+import { t } from "./localize";
 
 export const attachToElement = (element: HTMLElement, options: SandboxInfo, isOpen: boolean = false) => {
     let currentRoot: ReturnType<typeof createRoot> | null;
@@ -16,7 +17,8 @@ export const attachToElement = (element: HTMLElement, options: SandboxInfo, isOp
     };
 
     const exitButton = document.createElement("button");
-    exitButton.textContent = "exit";
+    exitButton.className = "honkit-plugin-sandpack--exitButton";
+    exitButton.textContent = t("exit_console");
     exitButton.setAttribute(
         "style",
         `
@@ -31,10 +33,9 @@ export const attachToElement = (element: HTMLElement, options: SandboxInfo, isOp
 `
     );
     exitButton.addEventListener("click", () => exit());
-    insert(exitButton);
-
     const runButton = document.createElement("button");
-    runButton.textContent = "run";
+    runButton.className = "honkit-plugin-sandpack--runButton";
+    runButton.textContent = t("run_console");
     runButton.setAttribute(
         "style",
         `
@@ -50,7 +51,11 @@ export const attachToElement = (element: HTMLElement, options: SandboxInfo, isOp
     );
 
     runButton.addEventListener("click", () => enter());
-    insert(runButton);
+    const buttonContainer = document.createElement("div");
+    buttonContainer.className = "honkit-plugin-sandpack--buttonContainer";
+    buttonContainer.append(runButton);
+    buttonContainer.append(exitButton);
+    insert(buttonContainer);
 
     const enter = () => {
         const files = {
@@ -70,7 +75,7 @@ export const attachToElement = (element: HTMLElement, options: SandboxInfo, isOp
         const entry = options.entry;
         containerElement = document.createElement("div");
         containerElement.classList.add("honkit-plugin-sandpack");
-        element.parentElement?.insertBefore(containerElement, element.nextSibling);
+        buttonContainer.parentElement?.insertBefore(containerElement, buttonContainer.nextSibling);
         currentRoot = createRoot(containerElement);
         currentRoot.render(
             <Sandpack

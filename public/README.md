@@ -5,7 +5,7 @@
     overflow: initial!important
 }
 .honkit-plugin-sandpack {
-    width: calc(100% + 100px);
+    width: calc(100% + 200px);
     margin: 0 0 0 -100px;
     background: #EECE34;
 }
