@@ -114,7 +114,6 @@ export const attachToElement = (element: HTMLElement | ChildNode, options: Sandb
         };
         const entry = options.entry;
         const sandpackOptions = options.options;
-        console.log({ sandpackOptions });
         const template = (options.template ?? "vanilla") as SandpackPredefinedTemplate;
         currentRoot.render(
             <Sandpack
