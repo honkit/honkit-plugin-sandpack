@@ -40,6 +40,7 @@ export const inlineFiles = (content: string, filePath: string) => {
             ...options,
             files: inlinedFiles
         };
-        return `<!-- sandpack:${JSON.stringify(updatedOptions)} -->`;
+        // avoid to nunjuck error
+        return `{%raw%}<!-- sandpack:${JSON.stringify(updatedOptions)} -->{%endraw%}`;
     });
 };
