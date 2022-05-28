@@ -1,7 +1,7 @@
 import { parseComment } from "./parse-comment";
-import type { SandpackBundlerFile } from "@codesandbox/sandpack-client/dist/types/types";
 import * as fs from "fs";
 import path from "path";
+import { SandboxOptions } from "./sandpack";
 
 const escapeHTMLComment = (content: string) => {
     // It will be restored when parsing comment
@@ -20,11 +20,7 @@ export const inlineFiles = (content: string, filePath: string) => {
                     path: importPath,
                     appendCode,
                     ...originalProps
-                } = entry[1] as SandpackBundlerFile & {
-                    prependCode?: string;
-                    path?: string;
-                    appendCode?: string;
-                };
+                } = entry[1] as SandboxOptions["files"][1];
 
                 const loadedCode = importPath
                     ? escapeHTMLComment(fs.readFileSync(path.resolve(baseDir, importPath), "utf-8"))

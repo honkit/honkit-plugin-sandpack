@@ -1,10 +1,34 @@
 import { Sandpack, SandpackPredefinedTemplate, SandpackSetup } from "@codesandbox/sandpack-react";
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { parseComment, SandboxInfo } from "./parse-comment";
+import { parseComment } from "./parse-comment";
 import { t } from "./localize";
+import { Dependencies, SandpackBundlerFile } from "@codesandbox/sandpack-client/dist/types/types";
 
-export const attachToElement = (element: HTMLElement, options: SandboxInfo, isOpen: boolean = false) => {
+// Based: SandboxInfo
+export type SandboxOptions = {
+    files: Record<
+        string,
+        SandpackBundlerFile & {
+            // prepend code snippet
+            prependCode?: string;
+            // load the path and fill code with it
+            // this path is based on the markdown file path
+            path?: string;
+            // append code snippet
+            appendCode?: string;
+        }
+    >;
+    dependencies?: Dependencies;
+    devDependencies?: Dependencies;
+    entry?: string;
+    /**
+     * What template we use, if not defined we infer the template from the dependencies or files.
+     */
+    template?: string;
+};
+
+export const attachToElement = (element: HTMLElement, options: SandboxOptions, isOpen: boolean = false) => {
     let currentRoot: ReturnType<typeof createRoot> | null;
     let containerElement: HTMLDivElement | null = null;
     const insert = (node: HTMLElement) => {
@@ -174,7 +198,7 @@ window.gitbook.events.bind("page.change", function () {
     updateCodeBlocs();
 });
 
-function replaceCodeWithConsole(codeBlock: Element, options: SandboxInfo) {
+function replaceCodeWithConsole(codeBlock: Element, options: SandboxOptions) {
     const codes = codeBlock.getElementsByTagName("code");
     if (!codes || codes.length === 0) {
         return;
