@@ -1,0 +1,18 @@
+{
+  "name": "honkit-plugin-sandpack-public",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "honkit build",
+    "dev": "honkit serve",
+    "ci": "npx install-local ../ && npm run build"
+  },
+  "keywords": [],
+  "author": "azu",
+  "license": "MIT",
+  "devDependencies": {
+    "honkit": "^3.7.1",
+    "honkit-plugin-sandpack": "file:.."
+  }
+}

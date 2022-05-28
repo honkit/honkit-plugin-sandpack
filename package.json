@@ -1,0 +1,59 @@
+{
+  "name": "honkit-plugin-sandpack",
+  "version": "1.0.0",
+  "homepage": "https://github.com/honkit/honkit-plugin-sandpack",
+  "bugs": {
+    "url": "https://github.com/honkit/honkit-plugin-sandpack/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/honkit/honkit-plugin-sandpack.git"
+  },
+  "license": "MIT",
+  "author": "azu",
+  "main": "index.js",
+  "files": [
+    "./index.js",
+    "lib/",
+    "assets/"
+  ],
+  "engines": {
+    "honkit": "*"
+  },
+  "scripts": {
+    "build": "npm run build:assert && npm run build:lib",
+    "build:assert": "esbuild src/sandpack.tsx --target=es2015 --bundle --outfile=assets/honkit-plugin-sandpack.js",
+    "build:lib": "tsc -p .",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
+    "prepare": "git config --local core.hooksPath .githooks",
+    "prepublishOnly": "npm run build",
+    "watch": "tsc -p . --watch",
+    "test": "npm run build"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css}": [
+      "prettier --write"
+    ]
+  },
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": false,
+    "tabWidth": 4,
+    "trailingComma": "none"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.35",
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.5",
+    "esbuild": "^0.14.41",
+    "lint-staged": "^12.4.2",
+    "prettier": "^2.6.2",
+    "typescript": "^4.7.2",
+    "@codesandbox/sandpack-client": "^1.0.4"
+  },
+  "dependencies": {
+    "@codesandbox/sandpack-react": "^1.0.4",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
+  }
+}
