@@ -66,10 +66,7 @@ export const attachToElement = (element: HTMLElement, options: SandboxInfo, isOp
             dependencies: options.dependencies,
             devDependencies: options.devDependencies
         };
-        console.log({
-            files,
-            setup
-        });
+        const entry = options.entry;
         containerElement = document.createElement("div");
         element.parentElement?.insertBefore(containerElement, element.nextSibling);
         currentRoot = createRoot(containerElement);
@@ -78,6 +75,7 @@ export const attachToElement = (element: HTMLElement, options: SandboxInfo, isOp
                 files={files}
                 customSetup={setup}
                 options={{
+                    startRoute: entry,
                     skipEval: false,
                     autorun: true
                 }}
@@ -143,10 +141,6 @@ function updateCodeBlocs() {
                 return commentNode?.textContent?.trim().startsWith("sandpack:");
             })
             .map((commentNode) => {
-                console.log({
-                    commentNode,
-                    options: parseComment(commentNode?.textContent?.trim()!)
-                });
                 return {
                     commentNode,
                     options: parseComment(commentNode?.textContent?.trim()!)
