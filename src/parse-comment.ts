@@ -24,10 +24,11 @@ Actual: ${comment}
         return {
             ...json
         };
-    } catch (error) {
+    } catch (error: any) {
         throw new Error(`Can not parsed the metadata.
 sandpack:{ ... } should be json string.
 Actual: ${comment}
+Error: ${error.message}
 `);
     }
 }
