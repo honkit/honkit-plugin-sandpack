@@ -111,7 +111,7 @@ export const attachToElement = (element: HTMLElement | ChildNode, options: Sandb
             entry: options.entry,
             dependencies: options.dependencies,
             devDependencies: options.devDependencies,
-            environment: options.environment ?? "parcel"
+            environment: options.environment ?? "static"
         };
         const entry = options.entry;
         const sandpackOptions = options.options;

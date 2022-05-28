@@ -36,7 +36,7 @@ Open editor at first.
 <!-- sandpack:{
   "files": {
     "/src/index.js": {
-      "prependCode": "import './index.css'; // Hack to load index.css. require parcel env \n",
+      "appendCode": "// 次の行は本編とは無関係のコードなので無視してください\nconst link = document.createElement('link');link.rel='stylesheet';link.href='https://jsprimer.net/use-case/todoapp/final/final/index.css';document.head.append(link);\n",
       "path": "example2/src/index.js"
     },
     "/src/App.js": {
@@ -51,8 +51,7 @@ Open editor at first.
       "path": "example2/index.html"
     }
   },
-  "entry": "/index.html",
-  "environment": "parcel",
+  "environment": "static",
   "options": {
     "showLineNumbers": true,
     "showInlineErrors": true,
