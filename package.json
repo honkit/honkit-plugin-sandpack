@@ -1,6 +1,6 @@
 {
   "name": "honkit-plugin-sandpack",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "homepage": "https://github.com/honkit/honkit-plugin-sandpack",
   "bugs": {
     "url": "https://github.com/honkit/honkit-plugin-sandpack/issues"
@@ -55,6 +55,5 @@
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
