@@ -3,13 +3,16 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { parseCommentAsSandboxOptions } from "./parse-comment-as-sandbox-options";
 import { t } from "./localize";
-import { Dependencies, SandpackBundlerFile } from "@codesandbox/sandpack-client/dist/types/types";
+import type { SandboxInfo } from "@codesandbox/sandpack-client";
 
 // Based: SandboxInfo
 export type SandboxOptions = {
     files: Record<
         string,
-        SandpackBundlerFile & {
+        {
+            code: string;
+            readOnly?: boolean;
+        } & {
             // prepend code snippet
             prependCode?: string;
             // load the path and fill code with it
@@ -19,13 +22,14 @@ export type SandboxOptions = {
             appendCode?: string;
         }
     >;
-    dependencies?: Dependencies;
-    devDependencies?: Dependencies;
+    dependencies?: SandboxInfo["dependencies"];
+    devDependencies?: SandboxInfo["devDependencies"];
     entry?: string;
     /**
      * What template we use, if not defined we infer the template from the dependencies or files.
      */
     template?: string;
+    options?: Record<string, any>; // Refer SandpackInternalProps
     honkitSettings?: {
         isOpen: boolean; // false by default
         hideExitButton: boolean; // false by default
@@ -109,6 +113,8 @@ export const attachToElement = (element: HTMLElement | ChildNode, options: Sandb
             environment: "parcel"
         };
         const entry = options.entry;
+        const sandpackOptions = options.options;
+        console.log({ sandpackOptions });
         const template = (options.template ?? "vanilla") as SandpackPredefinedTemplate;
         currentRoot.render(
             <Sandpack
@@ -117,7 +123,8 @@ export const attachToElement = (element: HTMLElement | ChildNode, options: Sandb
                 options={{
                     startRoute: entry,
                     skipEval: false,
-                    autorun: true
+                    autorun: true,
+                    ...sandpackOptions
                 }}
                 template={template}
             />

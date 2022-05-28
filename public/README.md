@@ -52,6 +52,13 @@ Open editor at first.
     }
   },
   "entry": "/index.html",
+  "options": {
+    "showLineNumbers": true,
+    "showInlineErrors": true,
+    "wrapContent": false,
+    "editorHeight": 550,
+    "editorWidthPercentage": 60
+  },
   "honkitSettings": {
     "isOpen": true,
     "hideExitButton": true
