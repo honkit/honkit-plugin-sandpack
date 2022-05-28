@@ -15,5 +15,5 @@
   }
 } -->
 ```js
-const test = 1
+document.querySelector("h1").style.color = "red";
 ```
