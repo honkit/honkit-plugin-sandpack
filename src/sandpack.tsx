@@ -1,4 +1,4 @@
-import { Sandpack, SandpackPredefinedTemplate, SandpackSetup } from "@codesandbox/sandpack-react";
+import { SandboxEnvironment, Sandpack, SandpackPredefinedTemplate, SandpackSetup } from "@codesandbox/sandpack-react";
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { parseCommentAsSandboxOptions } from "./parse-comment-as-sandbox-options";
@@ -25,6 +25,7 @@ export type SandboxOptions = {
     dependencies?: SandboxInfo["dependencies"];
     devDependencies?: SandboxInfo["devDependencies"];
     entry?: string;
+    environment?: SandboxEnvironment;
     /**
      * What template we use, if not defined we infer the template from the dependencies or files.
      */
@@ -110,7 +111,7 @@ export const attachToElement = (element: HTMLElement | ChildNode, options: Sandb
             entry: options.entry,
             dependencies: options.dependencies,
             devDependencies: options.devDependencies,
-            environment: "parcel"
+            environment: options.environment ?? "static"
         };
         const entry = options.entry;
         const sandpackOptions = options.options;

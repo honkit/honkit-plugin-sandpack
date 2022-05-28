@@ -53,6 +53,7 @@ Open editor at first.
     }
   },
   "entry": "/index.html",
+  "environment": "parcel",
   "options": {
     "showLineNumbers": true,
     "showInlineErrors": true,

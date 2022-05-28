@@ -36,7 +36,7 @@ Open editor at first.
 <!-- sandpack:{
   "files": {
     "/src/index.js": {
-      "prependCode": "import '/src/index.css'; // Hack to load index.css\n",
+      "prependCode": "import './index.css'; // Hack to load index.css. require parcel env \n",
       "path": "example2/src/index.js"
     },
     "/src/App.js": {
@@ -52,6 +52,7 @@ Open editor at first.
     }
   },
   "entry": "/index.html",
+  "environment": "parcel",
   "options": {
     "showLineNumbers": true,
     "showInlineErrors": true,
