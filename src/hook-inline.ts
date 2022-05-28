@@ -6,7 +6,7 @@ import { SandboxOptions } from "./sandpack";
 const escapeHTMLComment = (content: string) => {
     // It will be restored when parsing comment
     // to avoid break -->
-    return content.split("<!--").join("\\u003c\\u0021\\u002d\\u002d").split("-->").join("\\u002d\\u002d\\u003e");
+    return content.replace(/<!--/g, "\\u003c\\u0021\\u002d\\u002d").replace(/"-->"/g, "\\u002d\\u002d\\u003e");
 };
 export const inlineFiles = (content: string, filePath: string) => {
     const baseDir = path.dirname(filePath);
