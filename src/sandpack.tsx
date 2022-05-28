@@ -64,10 +64,12 @@ export const attachToElement = (element: HTMLElement, options: SandboxInfo, isOp
         const setup: SandpackSetup = {
             entry: options.entry,
             dependencies: options.dependencies,
-            devDependencies: options.devDependencies
+            devDependencies: options.devDependencies,
+            environment: "static"
         };
         const entry = options.entry;
         containerElement = document.createElement("div");
+        containerElement.classList.add("honkit-plugin-sandpack");
         element.parentElement?.insertBefore(containerElement, element.nextSibling);
         currentRoot = createRoot(containerElement);
         currentRoot.render(

@@ -16,7 +16,11 @@ Actual: ${comment}
 `);
     }
     try {
-        const json = JSON.parse(optionString[1]);
+        const json = JSON.parse(
+            optionString[1]
+                .replaceAll("\\\\u003c\\\\u0021\\\\u002d\\\\u002d", "<!--")
+                .replaceAll("\\\\u002d\\\\u002d\\\\u003e", "-->")
+        );
         return {
             ...json
         };

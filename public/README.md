@@ -9,7 +9,7 @@
       "path": "src/index.html"
     }
   },
-  "entry": "/src/index.js",
+  "entry": "index.html",
   "dependencies": {
     "uuid": "latest"
   }
