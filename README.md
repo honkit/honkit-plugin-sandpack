@@ -1,6 +1,6 @@
 # honkit-plugin-sandpack
 
-A HonKit plugin for Sandpack](https://sandpack.codesandbox.io/docs/).
+A HonKit plugin for [Sandpack](https://sandpack.codesandbox.io/docs/).
 
 ## Installation
 
