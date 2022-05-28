@@ -38,6 +38,8 @@ Integration code with HTML comments.
     const test = 1
     ```
 
+For more details, See [example](public/)
+
 ## Tests
 
 - [ ] Write How to Tests

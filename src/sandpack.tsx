@@ -1,7 +1,6 @@
-import { Sandpack } from "@codesandbox/sandpack-react";
+import { Sandpack, SandpackPredefinedTemplate, SandpackSetup } from "@codesandbox/sandpack-react";
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { SandpackSetup } from "@codesandbox/sandpack-react/dist/types/types";
 import { parseComment, SandboxInfo } from "./parse-comment";
 import { t } from "./localize";
 
@@ -66,17 +65,18 @@ export const attachToElement = (element: HTMLElement, options: SandboxInfo, isOp
             },
             ...options.files
         };
-        const setup: SandpackSetup = {
-            entry: options.entry,
-            dependencies: options.dependencies,
-            devDependencies: options.devDependencies,
-            environment: "static"
-        };
-        const entry = options.entry;
         containerElement = document.createElement("div");
         containerElement.classList.add("honkit-plugin-sandpack");
         buttonContainer.parentElement?.insertBefore(containerElement, buttonContainer.nextSibling);
         currentRoot = createRoot(containerElement);
+        const setup: SandpackSetup = {
+            entry: options.entry,
+            dependencies: options.dependencies,
+            devDependencies: options.devDependencies,
+            environment: "parcel"
+        };
+        const entry = options.entry;
+        const template = (options.template ?? "vanilla") as SandpackPredefinedTemplate;
         currentRoot.render(
             <Sandpack
                 files={files}
@@ -86,7 +86,7 @@ export const attachToElement = (element: HTMLElement, options: SandboxInfo, isOp
                     skipEval: false,
                     autorun: true
                 }}
-                template={"vanilla"}
+                template={template}
             />
         );
 
