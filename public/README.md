@@ -11,7 +11,7 @@
 }
 </style>
 
-This is example.
+This is combination with CodeBlock.
 
 <!-- sandpack:{
   "files": {
@@ -31,7 +31,7 @@ This is example.
 document.querySelector("h1").style.color = "red";
 ```
 
-This is complex example.
+Open editor at first.
 
 <!-- sandpack:{
   "files": {
@@ -51,8 +51,9 @@ This is complex example.
       "path": "example2/index.html"
     }
   },
-  "entry": "/index.html"
+  "entry": "/index.html",
+  "honkitSettings": {
+    "isOpen": true,
+    "hideExitButton": true
+  }
 } -->
-```js
-// Todo App
-```

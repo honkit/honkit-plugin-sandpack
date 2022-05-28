@@ -1,12 +1,10 @@
-import type { SandboxInfo } from "@codesandbox/sandpack-client";
-
-export type { SandboxInfo };
-
 /**
  * <!-- sandpack:{/ Sandpack Options /} -->
  * @param {string} comment
  */
-export function parseComment(comment: string): SandboxInfo {
+import { SandboxOptions } from "./sandpack";
+
+export function parseCommentAsSandboxOptions(comment: string): SandboxOptions {
     const CONSOLE_METADATA = /sandpack:({[\s\S]+})$/;
     const optionString = comment.match(CONSOLE_METADATA);
     if (!optionString) {

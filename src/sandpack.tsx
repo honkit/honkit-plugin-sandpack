@@ -1,7 +1,7 @@
 import { Sandpack, SandpackPredefinedTemplate, SandpackSetup } from "@codesandbox/sandpack-react";
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { parseComment } from "./parse-comment";
+import { parseCommentAsSandboxOptions } from "./parse-comment-as-sandbox-options";
 import { t } from "./localize";
 import { Dependencies, SandpackBundlerFile } from "@codesandbox/sandpack-client/dist/types/types";
 
@@ -26,9 +26,14 @@ export type SandboxOptions = {
      * What template we use, if not defined we infer the template from the dependencies or files.
      */
     template?: string;
+    honkitSettings?: {
+        isOpen: boolean; // false by default
+        hideExitButton: boolean; // false by default
+        hideRunButton: boolean; // false by default
+    };
 };
 
-export const attachToElement = (element: HTMLElement, options: SandboxOptions, isOpen: boolean = false) => {
+export const attachToElement = (element: HTMLElement | ChildNode, options: SandboxOptions) => {
     let currentRoot: ReturnType<typeof createRoot> | null;
     let containerElement: HTMLDivElement | null = null;
     const insert = (node: HTMLElement) => {
@@ -76,8 +81,12 @@ export const attachToElement = (element: HTMLElement, options: SandboxOptions, i
     runButton.addEventListener("click", () => enter());
     const buttonContainer = document.createElement("div");
     buttonContainer.className = "honkit-plugin-sandpack--buttonContainer";
-    buttonContainer.append(runButton);
-    buttonContainer.append(exitButton);
+    if (!options.honkitSettings?.hideRunButton) {
+        buttonContainer.append(runButton);
+    }
+    if (!options.honkitSettings?.hideExitButton) {
+        buttonContainer.append(exitButton);
+    }
     insert(buttonContainer);
 
     const enter = () => {
@@ -125,7 +134,7 @@ export const attachToElement = (element: HTMLElement, options: SandboxOptions, i
         runButton.style.display = "";
         exitButton.style.display = "none";
     };
-
+    const isOpen = options.honkitSettings?.isOpen ?? false;
     if (isOpen) {
         enter();
     } else {
@@ -174,7 +183,7 @@ function updateCodeBlocs() {
             .map((commentNode) => {
                 return {
                     commentNode,
-                    options: parseComment(commentNode?.textContent?.trim()!)
+                    options: parseCommentAsSandboxOptions(commentNode?.textContent?.trim()!)
                 };
             })
             .forEach(({ commentNode, options }) => {
@@ -187,7 +196,11 @@ function updateCodeBlocs() {
                 const nextNextNode = nextNode && nextNode.nextElementSibling;
                 const replaceNode = getCommentNextPreNode(prevNode, nextNode, nextNextNode);
                 if (replaceNode) {
-                    replaceCodeWithConsole(replaceNode, options);
+                    // append editor after pre/code
+                    attachToElement(replaceNode, options);
+                } else {
+                    // replace comment with the editor
+                    attachToElement(commentNode, options);
                 }
             });
     }
@@ -197,11 +210,3 @@ function updateCodeBlocs() {
 window.gitbook.events.bind("page.change", function () {
     updateCodeBlocs();
 });
-
-function replaceCodeWithConsole(codeBlock: Element, options: SandboxOptions) {
-    const codes = codeBlock.getElementsByTagName("code");
-    if (!codes || codes.length === 0) {
-        return;
-    }
-    attachToElement(codeBlock as HTMLElement, options);
-}

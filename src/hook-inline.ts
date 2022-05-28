@@ -1,4 +1,4 @@
-import { parseComment } from "./parse-comment";
+import { parseCommentAsSandboxOptions } from "./parse-comment-as-sandbox-options";
 import * as fs from "fs";
 import path from "path";
 import { SandboxOptions } from "./sandpack";
@@ -12,7 +12,7 @@ export const inlineFiles = (content: string, filePath: string) => {
     const baseDir = path.dirname(filePath);
     const commentPattern = /<!--\s?(sandpack:{[\s\S]*?})\s?-->/g;
     return content.replace(commentPattern, (_, match) => {
-        const options = parseComment(match.trim());
+        const options = parseCommentAsSandboxOptions(match.trim());
         const inlinedFiles = Object.fromEntries(
             Object.entries(options.files).map((entry) => {
                 const fileName = entry[0];
@@ -37,7 +37,7 @@ export const inlineFiles = (content: string, filePath: string) => {
             })
         );
         const updatedOptions = {
-            ...inlinedFiles,
+            ...options,
             files: inlinedFiles
         };
         return `<!-- sandpack:${JSON.stringify(updatedOptions)} -->`;
