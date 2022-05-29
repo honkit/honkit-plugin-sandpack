@@ -29,7 +29,7 @@ export type SandboxOptions = {
     /**
      * What template we use, if not defined we infer the template from the dependencies or files.
      */
-    template?: string;
+    template?: SandpackPredefinedTemplate;
     options?: Record<string, any>; // Refer SandpackInternalProps
     honkitSettings?: {
         isOpen: boolean; // false by default
@@ -115,7 +115,7 @@ export const attachToElement = (element: HTMLElement | ChildNode, options: Sandb
         };
         const entry = options.entry;
         const sandpackOptions = options.options;
-        const template = (options.template ?? "vanilla") as SandpackPredefinedTemplate;
+        const template = options.template;
         currentRoot.render(
             <Sandpack
                 files={files}
