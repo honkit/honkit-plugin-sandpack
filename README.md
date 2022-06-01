@@ -68,7 +68,7 @@ More complex example.
     // Todo App
     ```
 
-For more details, See [example](public/)
+For more details, See [example](https://github.com/honkit/honkit-plugin-sandpack/blob/main/public/README.md?plain=1)
 
 ## Tests
 
