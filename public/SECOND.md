@@ -16,7 +16,7 @@ This is combination with CodeBlock.
 <!-- sandpack:{
   "files": {
     "/src/index.js": {
-      "path": "example1/index.js"
+      "path": "example1/src/index.js"
     },
     "/index.html": {
       "path": "example1/index.html"

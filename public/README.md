@@ -16,16 +16,15 @@ This is combination with CodeBlock.
 <!-- sandpack:{
   "files": {
     "/src/index.js": {
-      "path": "example1/index.js"
+      "path": "example1/src/index.js"
     },
     "/index.html": {
       "path": "example1/index.html"
     }
   },
-  "entry": "/index.html",
-  "dependencies": {
-    "uuid": "latest"
-  }
+  "environment": "parcel",
+  "template": "vanilla",
+  "entry": "/index.html"
 } -->
 ```js
 document.querySelector("h1").style.color = "red";
@@ -71,3 +70,9 @@ Open editor at first.
     "hideExitButton": true
   }
 } -->
+
+## Note
+
+- `<script src=...></script>` does not work in environment `vanilla` 
+  - Use `enviroment: parcel` or use `externalResources` option
+  - [Styles and fonts in the head tag of index.html are not reflecting for react. · Issue #32 · codesandbox/sandpack](https://github.com/codesandbox/sandpack/issues/32)
