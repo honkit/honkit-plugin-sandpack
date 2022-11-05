@@ -6,7 +6,7 @@
   "scripts": {
     "build": "honkit build",
     "dev": "honkit serve",
-    "webstie": "npx install-local ../ && npm run build"
+    "webstie": "npx -y install-local ../ && npm run build"
   },
   "keywords": [],
   "author": "azu",

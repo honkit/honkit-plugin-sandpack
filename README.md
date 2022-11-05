@@ -70,6 +70,13 @@ More complex example.
 
 For more details, See [example](public/)
 
+## Note
+
+- `<script src=...></script>` does not work in `vanilla` environment
+    - Use `"enviroment": "parcel"` or use `externalResources` option
+      - parcel does bundle the `<script src=...></script>` in index.html
+    - [Styles and fonts in the head tag of index.html are not reflecting for react. · Issue #32 · codesandbox/sandpack](https://github.com/codesandbox/sandpack/issues/32)
+
 ## Tests
 
 - [ ] Write How to Tests
